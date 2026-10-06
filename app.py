@@ -53,26 +53,24 @@ c2.metric("Variables explicatives", len(FEATURES))
 c3.metric("Valeurs manquantes", f"{view[FEATURES].isna().mean().mean():.1%}")
 c4.metric("Prix median", f"{view[TARGET].median():.0f} EUR")
 
-# ---- Graphiques ----
-tab1, tab2, tab3, tab4 = st.tabs(
-    ["Distribution des prix", "Quartiers", "Carte", "Correlations"]
+# ---- Graphiques (un seul dessine a la fois : la carte WebGL s'initialise bien) ----
+vue = st.radio(
+    "Vue", ["Distribution des prix", "Quartiers", "Carte", "Correlations"],
+    horizontal=True, label_visibility="collapsed",
 )
 
-with tab1:
+if vue == "Distribution des prix":
     st.plotly_chart(price_histogram(view), width="stretch")
     st.caption("Distribution tres asymetrique : beaucoup de logements autour de 100-200 EUR, "
                "une longue queue vers les prix eleves.")
-
-with tab2:
+elif vue == "Quartiers":
     st.plotly_chart(price_by_neighbourhood(view), width="stretch")
     st.caption("Prix median par nuit et par quartier (donnees filtrees).")
-
-with tab3:
+elif vue == "Carte":
     st.plotly_chart(price_map(view), width="stretch")
-    st.caption("Prix moyen par case geographique (cases vides = aucun logement). "
-               "Echelle de couleur limitee a 100-400 EUR.")
-
-with tab4:
+    st.caption("5 000 logements maximum affiches (tirage aleatoire). "
+               "Couleurs limitees a 50-400 EUR pour rester lisibles.")
+else:
     st.plotly_chart(correlation_heatmap(view, NUMERIC_FEATURES + [TARGET]), width="stretch")
     st.caption("Correlation lineaire entre variables numeriques. "
                "Une correlation n'implique pas une relation de cause a effet.")

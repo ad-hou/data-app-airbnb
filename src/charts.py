@@ -1,7 +1,7 @@
 """Graphiques Plotly de l'application."""
-import math
-
 import plotly.express as px
+
+PARIS_CENTER = {"lat": 48.8566, "lon": 2.3522}
 
 
 def price_histogram(df):
@@ -38,20 +38,30 @@ def price_by_neighbourhood(df):
     return fig
 
 
-def price_map(df):
-    """Grille geographique : prix moyen par case (sans fond de carte)."""
-    fig = px.density_heatmap(
-        df, x="longitude", y="latitude", z="price", histfunc="avg",
-        nbinsx=45, nbinsy=35,
-        color_continuous_scale="Viridis", range_color=(100, 400),
-        range_x=(2.22, 2.47), range_y=(48.81, 48.91),
-        height=560,
+def price_map(df, max_points=5000):
+    """Vraie carte : un point par logement, colore selon le prix."""
+    sample = df.sample(min(len(df), max_points), random_state=42)
+    fig = px.scatter_map(
+        sample,
+        lat="latitude",
+        lon="longitude",
+        color="price",
+        color_continuous_scale="Viridis",
+        range_color=(50, 400),
+        hover_name="neighbourhood_cleansed",
+        hover_data={"price": ":.0f", "room_type": True,
+                    "latitude": False, "longitude": False},
+        center=PARIS_CENTER,
+        zoom=11,
+        opacity=0.7,
+        height=600,
     )
-    ratio = 1 / math.cos(math.radians(48.86))
-    fig.update_yaxes(scaleanchor="x", scaleratio=ratio, title="Latitude")
-    fig.update_xaxes(title="Longitude")
-    fig.update_layout(margin=dict(l=0, r=0, t=10, b=0),
-                      coloraxis_colorbar_title="EUR")
+    fig.update_traces(marker=dict(size=7))
+    fig.update_layout(
+        map_style="carto-positron",
+        margin=dict(l=0, r=0, t=0, b=0),
+        coloraxis_colorbar_title="EUR",
+    )
     return fig
 
 
