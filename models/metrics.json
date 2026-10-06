@@ -1,0 +1,30 @@
+{
+  "best_model": "Gradient Boosting",
+  "n_rows_clean": 45973,
+  "n_train": 36778,
+  "n_test": 9195,
+  "n_features": 13,
+  "models_compared": [
+    "Ridge",
+    "Random Forest",
+    "Gradient Boosting"
+  ],
+  "cv_mae": {
+    "Baseline (mediane)": 125.68890171080858,
+    "Ridge": 88.17444648640627,
+    "Random Forest": 69.10541678121804,
+    "Gradient Boosting": 65.91352841955577
+  },
+  "test": {
+    "mae": 65.61261095417187,
+    "rmse": 104.59779573726269,
+    "r2": 0.6669457506630909
+  },
+  "baseline_test": {
+    "mae": 126.76021750951607,
+    "rmse": 189.7021530608775,
+    "r2": -0.09550517700441441
+  },
+  "ratio_q10": 0.6768100025603287,
+  "ratio_q90": 1.4881088008107692
+}
