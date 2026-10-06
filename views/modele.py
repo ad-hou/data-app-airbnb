@@ -12,7 +12,6 @@ from sklearn.model_selection import train_test_split
 from src.data import TARGET
 from src.model import FEATURES, RANDOM_STATE, TEST_SIZE
 
-st.set_page_config(page_title="Modele - Airbnb Paris", layout="wide")
 
 LABELS = {
     "accommodates": "Capacite (personnes)",

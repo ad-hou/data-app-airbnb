@@ -1,11 +1,14 @@
 """Graphiques Plotly de l'application."""
 import plotly.express as px
 
+import src.style  # noqa: F401  (enregistre le gabarit Plotly)
+from src.style import PRIMARY
+
 PARIS_CENTER = {"lat": 48.8566, "lon": 2.3522}
 
 
 def price_histogram(df):
-    fig = px.histogram(df, x="price", nbins=60)
+    fig = px.histogram(df, x="price", nbins=60, color_discrete_sequence=[PRIMARY])
     fig.update_layout(
         xaxis_title="Prix par nuit (EUR)",
         yaxis_title="Nombre de logements",
@@ -25,14 +28,13 @@ def price_by_neighbourhood(df):
     )
     fig = px.bar(
         g, x="median", y="neighbourhood_cleansed", orientation="h",
-        color="median", color_continuous_scale="Viridis",
+        color_discrete_sequence=[PRIMARY],
         hover_data={"n": True, "median": ":.0f"},
         height=560,
     )
     fig.update_layout(
         xaxis_title="Prix median par nuit (EUR)",
         yaxis_title="",
-        coloraxis_showscale=False,
         margin=dict(l=10, r=10, t=10, b=10),
     )
     return fig

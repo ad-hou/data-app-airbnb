@@ -6,7 +6,6 @@ import streamlit as st
 from src.data import MAX_MIN_NIGHTS, PRICE_MAX, PRICE_MIN
 from src.model import CV_FOLDS, RANDOM_STATE, TEST_SIZE
 
-st.set_page_config(page_title="A propos - Airbnb Paris", layout="wide")
 
 
 @st.cache_data
@@ -53,8 +52,8 @@ st.markdown(
 )
 
 st.header("Resultats sur le jeu de test")
-c1, c2, c3, c4 = st.columns(4)
-c1.metric("Modele retenu", m["best_model"])
+st.markdown(f"**Modele retenu : {m['best_model']}**")
+c2, c3, c4 = st.columns(3)
 c2.metric("MAE", f"{t['mae']:.1f} EUR", f"{t['mae'] - b['mae']:.1f} EUR vs baseline",
           delta_color="inverse")
 c3.metric("RMSE", f"{t['rmse']:.1f} EUR")
