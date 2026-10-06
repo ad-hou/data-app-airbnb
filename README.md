@@ -5,6 +5,12 @@ le prix par nuit d'un logement à partir de ses caractéristiques.
 
 **Démo en ligne** : https://data-app-airbnb-jqbhvjoscsu22icsylnfdu.streamlit.app/
 
+## Aperçu
+
+![Exploration](docs/exploration.png)
+
+![Prédiction](docs/prediction.png)
+
 ## Ce que fait l'application
 
 - **Exploration** : filtres (quartier, type, prix), distribution des prix, prix par quartier, carte, corrélations.
