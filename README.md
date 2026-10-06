@@ -3,7 +3,7 @@
 Application Streamlit pour explorer les annonces Airbnb de Paris et estimer
 le prix par nuit d'un logement à partir de ses caractéristiques.
 
-**Démo en ligne** : _lien à ajouter après déploiement_
+**Démo en ligne** : https://data-app-airbnb-jqbhvjoscsu22icsylnfdu.streamlit.app/
 
 ## Ce que fait l'application
 
