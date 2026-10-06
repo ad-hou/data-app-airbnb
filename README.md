@@ -59,13 +59,16 @@ streamlit run app.py
 ```
 
 ## Structure
-app.py point d'entrée : navigation et style
-views/ pages : exploration, modèle, prédiction, à propos
-src/data.py chargement et nettoyage
-src/model.py entraînement et sauvegarde
-src/charts.py graphiques Plotly
-src/labels.py libellés français
-src/style.py thème et gabarit des graphiques
-notebooks/ exploration
-tests/ tests pytest
-models/ modèle et métriques
+
+```
+app.py                  point d'entrée : navigation et style
+views/                  pages : exploration, modèle, prédiction, à propos
+src/data.py             chargement et nettoyage
+src/model.py            entraînement et sauvegarde
+src/charts.py           graphiques Plotly
+src/labels.py           libellés français
+src/style.py            thème et gabarit des graphiques
+notebooks/              exploration
+tests/                  tests pytest
+models/                 modèle et métriques
+```
