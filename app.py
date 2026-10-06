@@ -2,7 +2,8 @@
 import pandas as pd
 import streamlit as st
 
-from src.charts import correlation_heatmap, price_histogram, price_map
+from src.charts import (correlation_heatmap, price_by_neighbourhood,
+                        price_histogram, price_map)
 from src.data import CATEGORICAL_FEATURES, NUMERIC_FEATURES, PRICE_MAX, PRICE_MIN, TARGET
 
 DATASET_PATH = "data/listings_clean.parquet"
@@ -53,7 +54,9 @@ c3.metric("Valeurs manquantes", f"{view[FEATURES].isna().mean().mean():.1%}")
 c4.metric("Prix median", f"{view[TARGET].median():.0f} EUR")
 
 # ---- Graphiques ----
-tab1, tab2, tab3 = st.tabs(["Distribution des prix", "Carte", "Correlations"])
+tab1, tab2, tab3, tab4 = st.tabs(
+    ["Distribution des prix", "Quartiers", "Carte", "Correlations"]
+)
 
 with tab1:
     st.plotly_chart(price_histogram(view), width="stretch")
@@ -61,11 +64,15 @@ with tab1:
                "une longue queue vers les prix eleves.")
 
 with tab2:
-    st.plotly_chart(price_map(view), width="stretch")
-    st.caption("5 000 logements maximum affiches (tirage aleatoire). "
-               "Couleurs plafonnees a 500 EUR pour rester lisibles.")
+    st.plotly_chart(price_by_neighbourhood(view), width="stretch")
+    st.caption("Prix median par nuit et par quartier (donnees filtrees).")
 
 with tab3:
+    st.plotly_chart(price_map(view), width="stretch")
+    st.caption("Prix moyen par case geographique (cases vides = aucun logement). "
+               "Echelle de couleur limitee a 100-400 EUR.")
+
+with tab4:
     st.plotly_chart(correlation_heatmap(view, NUMERIC_FEATURES + [TARGET]), width="stretch")
     st.caption("Correlation lineaire entre variables numeriques. "
                "Une correlation n'implique pas une relation de cause a effet.")
