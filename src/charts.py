@@ -10,7 +10,7 @@ PARIS_CENTER = {"lat": 48.8566, "lon": 2.3522}
 def price_histogram(df):
     fig = px.histogram(df, x="price", nbins=60, color_discrete_sequence=[PRIMARY])
     fig.update_layout(
-        xaxis_title="Prix par nuit (EUR)",
+        xaxis_title="Prix par nuit (\u20ac)",
         yaxis_title="Nombre de logements",
         bargap=0.05,
         margin=dict(l=10, r=10, t=10, b=10),
@@ -33,7 +33,7 @@ def price_by_neighbourhood(df):
         height=560,
     )
     fig.update_layout(
-        xaxis_title="Prix median par nuit (EUR)",
+        xaxis_title="Prix m\u00e9dian par nuit (\u20ac)",
         yaxis_title="",
         margin=dict(l=10, r=10, t=10, b=10),
     )
@@ -62,7 +62,7 @@ def price_map(df, max_points=5000):
     fig.update_layout(
         map_style="carto-positron",
         margin=dict(l=0, r=0, t=0, b=0),
-        coloraxis_colorbar_title="EUR",
+        coloraxis_colorbar_title="\u20ac",
     )
     return fig
 
